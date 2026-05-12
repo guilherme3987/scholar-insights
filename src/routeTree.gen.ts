@@ -9,13 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as BuscarRouteImport } from './routes/buscar'
+import { Route as AssistenteRouteImport } from './routes/assistente'
+import { Route as ApiDocsRouteImport } from './routes/api-docs'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PesquisadoresIndexRouteImport } from './routes/pesquisadores.index'
+import { Route as PesquisadoresIdRouteImport } from './routes/pesquisadores.$id'
 
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BuscarRoute = BuscarRouteImport.update({
   id: '/buscar',
   path: '/buscar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AssistenteRoute = AssistenteRouteImport.update({
+  id: '/assistente',
+  path: '/assistente',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiDocsRoute = ApiDocsRouteImport.update({
+  id: '/api-docs',
+  path: '/api-docs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -28,44 +53,122 @@ const PesquisadoresIndexRoute = PesquisadoresIndexRouteImport.update({
   path: '/pesquisadores/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PesquisadoresIdRoute = PesquisadoresIdRouteImport.update({
+  id: '/pesquisadores/$id',
+  path: '/pesquisadores/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/api-docs': typeof ApiDocsRoute
+  '/assistente': typeof AssistenteRoute
   '/buscar': typeof BuscarRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/dashboard': typeof DashboardRoute
+  '/pesquisadores/$id': typeof PesquisadoresIdRoute
   '/pesquisadores/': typeof PesquisadoresIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/api-docs': typeof ApiDocsRoute
+  '/assistente': typeof AssistenteRoute
   '/buscar': typeof BuscarRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/dashboard': typeof DashboardRoute
+  '/pesquisadores/$id': typeof PesquisadoresIdRoute
   '/pesquisadores': typeof PesquisadoresIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/api-docs': typeof ApiDocsRoute
+  '/assistente': typeof AssistenteRoute
   '/buscar': typeof BuscarRoute
+  '/configuracoes': typeof ConfiguracoesRoute
+  '/dashboard': typeof DashboardRoute
+  '/pesquisadores/$id': typeof PesquisadoresIdRoute
   '/pesquisadores/': typeof PesquisadoresIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/buscar' | '/pesquisadores/'
+  fullPaths:
+    | '/'
+    | '/api-docs'
+    | '/assistente'
+    | '/buscar'
+    | '/configuracoes'
+    | '/dashboard'
+    | '/pesquisadores/$id'
+    | '/pesquisadores/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/buscar' | '/pesquisadores'
-  id: '__root__' | '/' | '/buscar' | '/pesquisadores/'
+  to:
+    | '/'
+    | '/api-docs'
+    | '/assistente'
+    | '/buscar'
+    | '/configuracoes'
+    | '/dashboard'
+    | '/pesquisadores/$id'
+    | '/pesquisadores'
+  id:
+    | '__root__'
+    | '/'
+    | '/api-docs'
+    | '/assistente'
+    | '/buscar'
+    | '/configuracoes'
+    | '/dashboard'
+    | '/pesquisadores/$id'
+    | '/pesquisadores/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ApiDocsRoute: typeof ApiDocsRoute
+  AssistenteRoute: typeof AssistenteRoute
   BuscarRoute: typeof BuscarRoute
+  ConfiguracoesRoute: typeof ConfiguracoesRoute
+  DashboardRoute: typeof DashboardRoute
+  PesquisadoresIdRoute: typeof PesquisadoresIdRoute
   PesquisadoresIndexRoute: typeof PesquisadoresIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/configuracoes': {
+      id: '/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof ConfiguracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/buscar': {
       id: '/buscar'
       path: '/buscar'
       fullPath: '/buscar'
       preLoaderRoute: typeof BuscarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/assistente': {
+      id: '/assistente'
+      path: '/assistente'
+      fullPath: '/assistente'
+      preLoaderRoute: typeof AssistenteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api-docs': {
+      id: '/api-docs'
+      path: '/api-docs'
+      fullPath: '/api-docs'
+      preLoaderRoute: typeof ApiDocsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -82,14 +185,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PesquisadoresIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pesquisadores/$id': {
+      id: '/pesquisadores/$id'
+      path: '/pesquisadores/$id'
+      fullPath: '/pesquisadores/$id'
+      preLoaderRoute: typeof PesquisadoresIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ApiDocsRoute: ApiDocsRoute,
+  AssistenteRoute: AssistenteRoute,
   BuscarRoute: BuscarRoute,
+  ConfiguracoesRoute: ConfiguracoesRoute,
+  DashboardRoute: DashboardRoute,
+  PesquisadoresIdRoute: PesquisadoresIdRoute,
   PesquisadoresIndexRoute: PesquisadoresIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
