@@ -32,7 +32,7 @@ export const Route = createFileRoute("/pesquisadores/$id")({
 });
 
 function ResearcherProfile() {
-  const { r } = Route.useLoaderData();
+  const { r } = Route.useLoaderData() as { r: Researcher };
 
   return (
     <PageShell>
