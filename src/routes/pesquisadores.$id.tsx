@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PageShell } from "@/components/app-shell";
 import { Tag, SectionHeader } from "@/components/ui-kit";
-import { researchers } from "@/lib/data";
+import { researchers, type Researcher } from "@/lib/data";
 import { ProductionBars, CollaborationGraph } from "@/components/charts";
 import { Breadcrumbs } from "./buscar";
 
